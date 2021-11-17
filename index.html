@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+    body {
+        background: linear-gradient(to right, red 0%, black 100%);
+        color: white;
+    }
+
+    table{
+        border: solid whitesmoke 5px;
+     
+        padding: 3px;}
+
+    img {
+        width: 450px;
+        height: 450px;
+        border-radius: 30%;
+    }
+
+    a:link,
+    a:visited {
+        font-weight: blod;
+        text-decoration: none;
+        color: white;
+    }
+</style>
+
+<body>
+    <table>
+
+        <form name="theform">
+
+
+            <tr>
+                <td>
+                    <h2>Hotel Charges</h2>
+                </td>
+            </tr>
+
+            <tr>
+                <td colspan="2">
+                    Input nummber of nights, Nightly charge, room service, telephone charge and miscellance 
+                    chage to computer room charges, addition charge, subtal tax and 
+                    total charges for your stay at the hotel
+                </td>
+            </tr>
+
+            <tr>
+                <td rowspan="17"><img src="pic1.jpg" alt=""></td>
+                <td></td>
+                <td></td>
+                <td rowspan="17"><img src="pic2.jpg" alt=""></td>
+
+            </tr>
+            <tr>
+                <td><strong><span style="float: left"> Room Charges: </span></strong></td>
+
+            </tr>
+
+
+            <tr>
+                <td><span style="float: right"> Nights: </span></td>
+                <td><input name="night" size="10"></td>
+            </tr>
+            <tr>
+                <td><span style="float: right"> Nightly Charge: </span></td>
+                <td><input name="charge" size="10"></td>
+            </tr>
+
+
+            <tr>
+                
+                <td colspan="2"><hr></td>
+                
+                <td ></td>
+
+            </tr>
+
+            <tr>
+                <td><strong><span style="float: left"> Additional Charges: </span></strong></td>
+               
+            </tr>
+            <tr>
+                <td><span style="float: right"> Room Service: </span></td>
+                <td><input name="roomService" size="10"></td>
+            </tr>
+            <tr>
+                <td><span style="float: right"> Telephone Charge: </span></td>
+                <td id=><input name="telecharge" size="10"></td>
+            </tr>
+
+            <tr>
+                <td><span style="float: right"> Miscellancous: </span></td>
+                <td><input name="miscell" size="10"></td>
+            </tr>
+
+
+
+            <tr>
+                
+                <td colspan="2"><hr></td>
+                
+                <td ></td>
+
+            </tr>
+
+            <tr>
+                <td><strong><span style="float: left"> Total Charges: </span></strong></td>
+                
+
+               
+            </tr>
+            <tr>
+                <td><span style="float: right"> Room Charges: </span></td>
+                <td style="background-color: white; color: black" id="RoomOutPut" ></td>
+            </tr>
+            <tr>
+                <td><span style="float: right"> Additional Charges: </span></td>
+                <td style="background-color: white; color: black" id="AdditionalOutPut" ></td>
+            </tr>
+            <tr>
+                <td><span style="float: right"> Subtotal: </span></td>
+                <td style="background-color: white; color: black" id="SubtotalOutPut" ></td>
+            </tr>
+            <tr>
+                <td><span style="float: right"> Tax (8.25%): </span></td>
+                <td style="background-color: white; color: black" id="TaxOutPut" ></td>
+            </tr>
+            <tr>
+                <td><span style="float: right"> Total Charges: </span></td>
+                <td style="background-color: white; color: black" id="TotalOutPut" ></td>
+            </tr>
+            
+
+
+            <tr>
+                <td><input type="button" name="cal" value="Calculate" onclick="calculate();">
+                    <input type="button" name="clear" value="Clear" onclick="clearinfo();">
+                </td>
+            </tr>
+
+        </form>
+
+    </table>
+
+<script>
+
+
+
+function calculate(){
+
+const tax = 0.0825;
+
+var Days;
+var Nightly;
+var Roomservice;
+var Telephone;
+var Misc;
+var TCAC;
+var TCRC;
+var TCST;
+var TCTAX;
+var TOTAL;
+
+
+days = parseInt(document.theform.night.value);
+Nightly = parseFloat(document.theform.charge.value);
+Roomservice=parseFloat(document.theform.roomService.value);
+Misc= parseFloat(document.theform.miscell.value);
+Telephone = parseFloat(document.theform.telecharge.value);
+TCRC= parseFloat(days * Nightly);
+TCAC = parseFloat(Roomservice + Misc + Telephone);
+TCST= parseFloat((days*Nightly) + Roomservice + Misc + Telephone);
+TCTAX = parseFloat(TCST * tax); 
+TOTAL = parseFloat(TCST + TCTAX);
+
+
+
+
+document.getElementById("RoomOutPut").innerHTML = "$ " + TCRC.toFixed(2)
+document.getElementById("AdditionalOutPut").innerHTML = "$ " + TCAC.toFixed(2)
+document.getElementById("SubtotalOutPut").innerHTML = "$ " + TCST.toFixed(2)
+document.getElementById("TaxOutPut").innerHTML = "$ " + TCTAX.toFixed(2)
+document.getElementById("TotalOutPut").innerHTML = "$ " + TOTAL.toFixed(2)
+
+
+}
+</script>
+<script>
+      function clearinfo() {
+            document.theform.night.value = " ";
+            document.theform.charge.value = " ";
+            document.theform.roomService.value = " ";
+            document.theform.telecharge.value = " ";
+            document.theform.miscell.value = " ";
+
+            document.getElementById("RoomOutPut").innerHTML = " ";
+            document.getElementById("AdditionalOutPut").innerHTML = " ";
+            document.getElementById("SubtotalOutPut").innerHTML = " ";
+            document.getElementById("TaxOutPut").innerHTML = " ";
+
+            document.getElementById("TotalOutPut").innerHTML = " ";
+         
+
+
+            document.theform.night.focus();
+
+        }
+
+</script>
+
+
+
+
+
+
+
+</body>
+<a href="http://csnet.southtexascollege.edu/localuser/rortiz84/">Go Back to HomePage</a><br>
+<p style="color: white;"> Roy Ortiz</p><br>
+
+</html>
